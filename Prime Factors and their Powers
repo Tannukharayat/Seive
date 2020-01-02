@@ -1,0 +1,56 @@
+**Given a number N, print all its unique prime factors and their powers in N.**
+Input:
+2
+100
+35
+
+Output:
+2 2 5 2
+5 1 7 1
+
+      #include <iostream>
+      #include <vector>
+      using namespace std;
+
+      int main() 
+      {
+        int t ;
+        cin >> t ;
+        int spf[10001];
+        vector<int> v[10001];
+        for(int i = 0 ; i < 10001 ; i++ )
+        {
+            if(i%2 == 0)
+            {
+                spf[i]=2;
+            }else
+            if(i%3 == 0)
+            {
+                spf[i]=3;
+            }else spf[i]=i;
+        }
+        for(int i = 5 ; i < 10001 ; i++ )
+        {
+            if(spf[i]==i)
+            for(int j = i*i ; j <= 10001 ; j+=i )
+            {
+              if(spf[j]==j)
+                spf[j]=i;
+            }
+        }
+          for( int i = 0 ; i < t ; i++ )
+          {
+              int n;
+              cin >> n ;
+              while(n>1)
+              {
+                  int x=spf[n], cnt = 0;
+                  while(spf[n]==x&&n>1)
+                  {
+                      cnt++;
+                      n=n/spf[n];
+                  }cout<<x<<" "<<cnt<<" ";
+              }cout<<endl;
+          }
+        return 0;
+      }
