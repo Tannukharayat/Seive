@@ -1,0 +1,40 @@
+**Given an array of positive integers and many queries for divisibility. In every query Q[i], we are given an integer K , we need to count
+all elements in the array which are perfectly divisible by K  **
+
+
+    int main() 
+    {
+      int t ; 
+      cin >> t ;
+      for(int i = 0 ; i < t ; i++ )
+      {
+          int n , m , x , mx=-1 ;
+          cin >> n >> m ;
+          int a[n] , cnt[100001];
+          memset(cnt,0,sizeof(cnt));
+          for(int j = 0 ; j < n ; j++ )
+          {
+              cin >> a[j];
+              mx=max(mx,a[j]);
+              cnt[a[j]]++;
+          }
+          int ans[100001];
+          memset(ans, 0, sizeof(ans));
+          for(int j = 1 ; j <= mx ; j++)
+          {
+              for(int k=j ; k <= mx ; k+=j )
+              {
+                  if(cnt[k]>0)
+                  {
+                      ans[j]+=cnt[k];
+                  }
+              }
+          }
+           for(int j = 0 ; j < m ; j++ )
+          {
+              cin >> x;
+              cout<<ans[x]<<" ";
+          }cout<<endl;
+      }
+      return 0;
+    }
