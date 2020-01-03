@@ -1,0 +1,50 @@
+**Given an array of integers find the pair in the array with maximum GCD**
+
+          int main() 
+          {
+            int t ; 
+            cin >> t ;
+            while(t--)
+            {
+                int n;
+                cin >> n ;
+                int a[n];
+                int mx=-1;
+                int count[100001];
+                memset(count,0,sizeof(count));
+                for(int i = 0 ; i < n ; i++ )
+                {
+                    cin >> a[i];
+                    count[a[i]]++;
+                    mx=max(mx,a[i]);
+                }
+                int ans = 0;
+                for(int i = mx ; i >= 0 ; i-- )
+                {
+                    int j=i, cnt = 0;
+                    while(j<=mx)
+                    {
+                        if(count[j]>=2)
+                        {
+                            ans = 1;
+                            cout<<i<<endl;
+                            break;
+                        }
+                        if(count[j]==1)
+                        cnt++;
+                        if(cnt>=2)
+                        {
+
+                            ans = 1;
+                            cout<<i<<endl;
+                            break;
+                        }
+                        j+=i;
+                    }
+                    if(ans == 1)
+                    break;
+                }
+
+            }
+            return 0;
+          }
