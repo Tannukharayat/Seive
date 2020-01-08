@@ -1,0 +1,28 @@
+/* Given a number N, find the total numbers, less than or equal to N which have at-least one common factor with N other than 1 */
+
+int main() 
+{
+	int t ;
+	cin >> t ;
+	for(int i = 0 ; i < t ; i++ )
+	{
+	    int n , x , y ;
+	    cin >> n ;
+	    x=n, y=n;
+	    for(int j = 2 ; j*j <= n ; j++)
+	    {
+	        if(n%j==0)
+	        {
+	            while(n%j==0)
+	            {
+	                n=n/j;
+	            }
+	             x-=x/j;
+	        }
+	    }
+	    if(n>1)
+	    x-=x/n;
+	    cout<<y-x<<endl;
+	}
+	return 0;
+}
