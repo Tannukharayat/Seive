@@ -1,0 +1,38 @@
+Given a number N, count total number of divisors of N!.
+Examples:
+Input : N = 4
+Output: 8
+4! is 24. Divisors of 24 are 1, 2, 3, 4, 6,
+8, 12 and 24.       
+       
+        vector<int> v;
+        int prime[101];
+        memset(prime,0,sizeof(prime));
+        for(int i = 2 ; i*i < 101 ; i++ )
+        {
+            for(int j = i*i ; j < 101 ; j+=i )
+            {
+                prime[j]=1;
+            }
+        }
+        for( int i = 2 ; i < 101 ; i++ )
+            {
+                if(prime[i]==0)
+                v.push_back(i);
+            }
+        while(t--)
+        {
+            cin >> n ;
+            long long int fact = 1;
+            long long int res=1;
+            for(int i = 0 ; v[i] <= n  && i<v.size(); i++)
+            {
+                    long long int x = n , ans = 0;
+                    while(x>0)
+                    {
+                        x=x/v[i];
+                        ans+=x;
+                    }
+                    res=res*(ans+1);
+            }cout<<res<<endl;
+        }
